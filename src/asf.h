@@ -63,8 +63,17 @@
 #include <ccp.h>
 #include <xmega_reset_cause.h>
 
+// From module: Calendar functionality
+#include <calendar.h>
+
 // From module: Delay routines
 #include <delay.h>
+
+// From module: FatFS file system
+#include <diskio.h>
+#include <ff.h>
+#include <ffconf.h>
+#include <integer.h>
 
 // From module: GFX Monochrome - Menu System
 #include <gfx_mono_menu.h>
@@ -102,6 +111,9 @@
 // From module: Part identification macros
 #include <parts.h>
 
+// From module: RTC32 - Real Time Counter 32
+#include <rtc32.h>
+
 // From module: SD/MMC stack on SPI interface
 #include <sd_mmc.h>
 
@@ -109,8 +121,8 @@
 #include <spi.h>
 
 // From module: SPI - XMEGA implementation
-#include <usart_spi.h>
-#include <xmega_usart_spi/usart_spi.h>
+#include <spi_master.h>
+#include <spi_master.h>
 
 // From module: ST7565R LCD controller
 #include <st7565r.h>
@@ -127,6 +139,9 @@
 
 // From module: Standard serial I/O (stdio) - XMEGA implementation
 #include <stdio_serial.h>
+
+// From module: Supported ports of FatFS
+#include <diskio.h>
 
 // From module: System Clock Control - XMEGA A1U/A3U/A3BU/A4U/B/C implementation
 #include <sysclk.h>
