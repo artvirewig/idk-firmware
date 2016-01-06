@@ -33,16 +33,22 @@
     <option id="common.services.gfx_mono.menu" value="Add" config="" content-id="Atmel.ASF" />
     <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
     <option id="common.services.sensors" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="common.utils.stdio.stdio_serial" value="Add" config="" content-id="Atmel.ASF" />
     <option id="config.common.services.qtouch.generic.avr8.xmega_a3bu_xplained.method" value="Add" config="qtouch_method" content-id="Atmel.ASF" />
     <option id="xmega.drivers.adc" value="Add" config="" content-id="Atmel.ASF" />
     <option id="xmega.drivers.ioport" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="common.utils.stdio.stdio_serial" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="common.services.gfx_mono.spinctrl" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="common.services.basic.spi_master" value="Add" config="usart_and_standard_spi" content-id="Atmel.ASF" />
+    <option id="common.components.memory.sd_mmc" value="Add" config="spi" content-id="Atmel.ASF" />
+    <option id="common.services.usb.class.device" value="Add" config="mass_storage" content-id="Atmel.ASF" />
     <option id="common.applications.user_application" value="Add" config="" content-id="Atmel.ASF" />
   </options>
   <configurations>
     <configuration key="config.spi_master_type" value="usart_and_standard_spi" default="usart_and_standard_spi" content-id="Atmel.ASF" />
     <configuration key="config.gfx_mono.display" value="c12832_a1z" default="c12832_a1z" content-id="Atmel.ASF" />
     <configuration key="config.xmega.drivers.twi.mode" value="both" default="both" content-id="Atmel.ASF" />
+    <configuration key="config.common.components.memory.sd_mmc.ctrl_access" value="disable" default="disable" content-id="Atmel.ASF" />
+    <configuration key="config.xmega.drivers.usb.device.sleepmgr" value="with_sleepmgr" default="with_sleepmgr" content-id="Atmel.ASF" />
   </configurations>
   <files>
     <file path="src/config/conf_board.h" framework="" version="" source="common/applications/user_application/atxmega256a3bu_xmega_a3bu_xplained/config/conf_board.h" changed="False" content-id="Atmel.ASF" />
@@ -206,6 +212,35 @@
     <file path="src/ASF/common/utils/stdio/read.c" framework="" version="3.29.0" source="common\utils\stdio\read.c" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/common/utils/stdio/write.c" framework="" version="3.29.0" source="common\utils\stdio\write.c" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/common/utils/stdio/stdio_serial/stdio_serial.h" framework="" version="3.29.0" source="common\utils\stdio\stdio_serial\stdio_serial.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/gfx_mono/gfx_mono_spinctrl.c" framework="" version="3.29.0" source="common\services\gfx_mono\gfx_mono_spinctrl.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/gfx_mono/gfx_mono_spinctrl.h" framework="" version="3.29.0" source="common\services\gfx_mono\gfx_mono_spinctrl.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/Config/conf_spinctrl.h" framework="" version="3.29.0" source="common\services\gfx_mono\module_config\conf_spinctrl.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/storage/ctrl_access/ctrl_access.c" framework="" version="3.29.0" source="common\services\storage\ctrl_access\ctrl_access.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/storage/ctrl_access/ctrl_access.h" framework="" version="3.29.0" source="common\services\storage\ctrl_access\ctrl_access.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/Config/conf_access.h" framework="" version="3.29.0" source="common\services\storage\ctrl_access\module_config\conf_access.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/components/memory/sd_mmc/sd_mmc.c" framework="" version="3.29.0" source="common\components\memory\sd_mmc\sd_mmc.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/components/memory/sd_mmc/sd_mmc_spi.c" framework="" version="3.29.0" source="common\components\memory\sd_mmc\sd_mmc_spi.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/components/memory/sd_mmc/sd_mmc.h" framework="" version="3.29.0" source="common\components\memory\sd_mmc\sd_mmc.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/components/memory/sd_mmc/sd_mmc_spi.h" framework="" version="3.29.0" source="common\components\memory\sd_mmc\sd_mmc_spi.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/Config/conf_sd_mmc.h" framework="" version="3.29.0" source="common\components\memory\sd_mmc\module_config_spi\conf_sd_mmc.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/components/memory/sd_mmc/sd_mmc_protocol.h" framework="" version="3.29.0" source="common\components\memory\sd_mmc\sd_mmc_protocol.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/usb_atmel.h" framework="" version="3.29.0" source="common\services\usb\usb_atmel.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/usb_protocol.h" framework="" version="3.29.0" source="common\services\usb\usb_protocol.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/class/msc/usb_protocol_msc.h" framework="" version="3.29.0" source="common\services\usb\class\msc\usb_protocol_msc.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/class/msc/sbc_protocol.h" framework="" version="3.29.0" source="common\services\usb\class\msc\sbc_protocol.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/class/msc/spc_protocol.h" framework="" version="3.29.0" source="common\services\usb\class\msc\spc_protocol.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/class/msc/device/udi_msc.c" framework="" version="3.29.0" source="common\services\usb\class\msc\device\udi_msc.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/class/msc/device/udi_msc_desc.c" framework="" version="3.29.0" source="common\services\usb\class\msc\device\udi_msc_desc.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/class/msc/device/udi_msc.h" framework="" version="3.29.0" source="common\services\usb\class\msc\device\udi_msc.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/class/msc/device/udi_msc_conf.h" framework="" version="3.29.0" source="common\services\usb\class\msc\device\udi_msc_conf.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/Config/conf_usb.h" framework="" version="3.29.0" source="common\services\usb\class\msc\device\module_config\conf_usb.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/udc/udc.c" framework="" version="3.29.0" source="common\services\usb\udc\udc.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/udc/udc.h" framework="" version="3.29.0" source="common\services\usb\udc\udc.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/udc/udd.h" framework="" version="3.29.0" source="common\services\usb\udc\udd.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/udc/udc_desc.h" framework="" version="3.29.0" source="common\services\usb\udc\udc_desc.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/usb/udc/udi.h" framework="" version="3.29.0" source="common\services\usb\udc\udi.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/xmega/drivers/usb/usb_device.c" framework="" version="3.29.0" source="xmega\drivers\usb\usb_device.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/xmega/drivers/usb/usb_device.h" framework="" version="3.29.0" source="xmega\drivers\usb\usb_device.h" changed="False" content-id="Atmel.ASF" />
   </files>
   <documentation help="http://asf.atmel.com/docs/3.29.0/common.applications.user_application.xmega_a3bu_xplained/html/index.html" />
   <offline-documentation help="" />
@@ -255,6 +290,7 @@
       <Value>QTOUCH_STUDIO_MASKS=1</Value>
       <Value>NUMBER_OF_PORTS=1</Value>
       <Value>SNS1=F</Value>
+      <Value>ACCESS_USB_ENABLED</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
@@ -294,6 +330,13 @@
       <Value>../src/ASF/common/services/serial/xmega_usart</Value>
       <Value>../src/ASF/common/services/serial</Value>
       <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
+      <Value>../src/ASF/common/services/storage/ctrl_access</Value>
+      <Value>../src/ASF/common/components/memory/sd_mmc</Value>
+      <Value>../src/ASF/common/services/usb</Value>
+      <Value>../src/ASF/common/services/usb/class/msc</Value>
+      <Value>../src/ASF/common/services/usb/class/msc/device</Value>
+      <Value>../src/ASF/common/services/usb/udc</Value>
+      <Value>../src/ASF/xmega/drivers/usb</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -351,6 +394,13 @@
       <Value>../src/ASF/common/services/serial/xmega_usart</Value>
       <Value>../src/ASF/common/services/serial</Value>
       <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
+      <Value>../src/ASF/common/services/storage/ctrl_access</Value>
+      <Value>../src/ASF/common/components/memory/sd_mmc</Value>
+      <Value>../src/ASF/common/services/usb</Value>
+      <Value>../src/ASF/common/services/usb/class/msc</Value>
+      <Value>../src/ASF/common/services/usb/class/msc/device</Value>
+      <Value>../src/ASF/common/services/usb/udc</Value>
+      <Value>../src/ASF/xmega/drivers/usb</Value>
     </ListValues>
   </avrgcc.assembler.general.IncludePaths>
 </AvrGcc>
@@ -380,6 +430,7 @@
       <Value>QTOUCH_STUDIO_MASKS=1</Value>
       <Value>NUMBER_OF_PORTS=1</Value>
       <Value>SNS1=F</Value>
+      <Value>ACCESS_USB_ENABLED</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
@@ -419,6 +470,13 @@
       <Value>../src/ASF/common/services/serial/xmega_usart</Value>
       <Value>../src/ASF/common/services/serial</Value>
       <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
+      <Value>../src/ASF/common/services/storage/ctrl_access</Value>
+      <Value>../src/ASF/common/components/memory/sd_mmc</Value>
+      <Value>../src/ASF/common/services/usb</Value>
+      <Value>../src/ASF/common/services/usb/class/msc</Value>
+      <Value>../src/ASF/common/services/usb/class/msc/device</Value>
+      <Value>../src/ASF/common/services/usb/udc</Value>
+      <Value>../src/ASF/xmega/drivers/usb</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -477,6 +535,13 @@
       <Value>../src/ASF/common/services/serial/xmega_usart</Value>
       <Value>../src/ASF/common/services/serial</Value>
       <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
+      <Value>../src/ASF/common/services/storage/ctrl_access</Value>
+      <Value>../src/ASF/common/components/memory/sd_mmc</Value>
+      <Value>../src/ASF/common/services/usb</Value>
+      <Value>../src/ASF/common/services/usb/class/msc</Value>
+      <Value>../src/ASF/common/services/usb/class/msc/device</Value>
+      <Value>../src/ASF/common/services/usb/udc</Value>
+      <Value>../src/ASF/xmega/drivers/usb</Value>
     </ListValues>
   </avrgcc.assembler.general.IncludePaths>
   <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
@@ -491,6 +556,8 @@
     <Folder Include="src\ASF\common\components\" />
     <Folder Include="src\ASF\common\components\display\" />
     <Folder Include="src\ASF\common\components\display\st7565r\" />
+    <Folder Include="src\ASF\common\components\memory\" />
+    <Folder Include="src\ASF\common\components\memory\sd_mmc\" />
     <Folder Include="src\ASF\common\services\" />
     <Folder Include="src\ASF\common\services\clock\" />
     <Folder Include="src\ASF\common\services\clock\xmega\" />
@@ -520,8 +587,15 @@
     <Folder Include="src\ASF\common\services\spi\" />
     <Folder Include="src\ASF\common\services\spi\xmega_spi\" />
     <Folder Include="src\ASF\common\services\spi\xmega_usart_spi\" />
+    <Folder Include="src\ASF\common\services\storage\" />
+    <Folder Include="src\ASF\common\services\storage\ctrl_access\" />
     <Folder Include="src\ASF\common\services\twi\" />
     <Folder Include="src\ASF\common\services\twi\xmega_twi\" />
+    <Folder Include="src\ASF\common\services\usb\" />
+    <Folder Include="src\ASF\common\services\usb\class\" />
+    <Folder Include="src\ASF\common\services\usb\class\msc\" />
+    <Folder Include="src\ASF\common\services\usb\class\msc\device\" />
+    <Folder Include="src\ASF\common\services\usb\udc\" />
     <Folder Include="src\ASF\common\utils\" />
     <Folder Include="src\ASF\common\utils\interrupt\" />
     <Folder Include="src\ASF\common\utils\make\" />
@@ -549,6 +623,7 @@
     <Folder Include="src\ASF\xmega\drivers\spi\" />
     <Folder Include="src\ASF\xmega\drivers\twi\" />
     <Folder Include="src\ASF\xmega\drivers\usart\" />
+    <Folder Include="src\ASF\xmega\drivers\usb\" />
     <Folder Include="src\ASF\xmega\utils\" />
     <Folder Include="src\ASF\xmega\utils\assembler\" />
     <Folder Include="src\ASF\xmega\utils\bit_handling\" />
@@ -688,6 +763,21 @@
     <None Include="src\ASF\common\components\display\st7565r\st7565r.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\ASF\common\components\memory\sd_mmc\sd_mmc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\components\memory\sd_mmc\sd_mmc.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\components\memory\sd_mmc\sd_mmc_protocol.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\components\memory\sd_mmc\sd_mmc_spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\components\memory\sd_mmc\sd_mmc_spi.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\common\services\clock\xmega\sysclk.c">
       <SubType>compile</SubType>
     </Compile>
@@ -725,6 +815,12 @@
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\common\services\gfx_mono\gfx_mono_menu.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\services\gfx_mono\gfx_mono_spinctrl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\gfx_mono\gfx_mono_spinctrl.h">
       <SubType>compile</SubType>
     </None>
     <Compile Include="src\ASF\common\services\gfx_mono\gfx_mono_text.c">
@@ -922,6 +1018,54 @@
     <None Include="src\ASF\common\services\twi\twi_master.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\ASF\common\services\storage\ctrl_access\ctrl_access.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\storage\ctrl_access\ctrl_access.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\usb_atmel.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\usb_protocol.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\class\msc\usb_protocol_msc.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\class\msc\sbc_protocol.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\class\msc\spc_protocol.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\services\usb\class\msc\device\udi_msc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\usb\class\msc\device\udi_msc.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\class\msc\device\udi_msc_conf.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\services\usb\class\msc\device\udi_msc_desc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\common\services\usb\udc\udc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\usb\udc\udc.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\udc\udd.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\udc\udc_desc.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\usb\udc\udi.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\common\utils\stdio\read.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1037,6 +1181,24 @@
       <SubType>compile</SubType>
     </None>
     <None Include="src\config\conf_usart_serial.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\config\conf_spinctrl.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\config\conf_access.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\config\conf_sd_mmc.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\config\conf_usb.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\xmega\drivers\usb\usb_device.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\xmega\drivers\usb\usb_device.h">
       <SubType>compile</SubType>
     </None>
     <Compile Include="src\main.c">

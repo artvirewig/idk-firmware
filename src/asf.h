@@ -72,6 +72,9 @@
 // From module: GFX Monochrome - Monochrome Graphic Library
 #include <gfx_mono.h>
 
+// From module: GFX Monochrome - Spinner/Spin control widget
+#include <gfx_mono_spinctrl.h>
+
 // From module: GFX Monochrome - System Font
 #include <sysfont.h>
 
@@ -87,6 +90,9 @@
 // From module: Interrupt management - XMEGA implementation
 #include <interrupt.h>
 
+// From module: Memory Control Access Interface
+#include <ctrl_access.h>
+
 // From module: NVM - Non Volatile Memory
 #include <nvm.h>
 
@@ -95,6 +101,9 @@
 
 // From module: Part identification macros
 #include <parts.h>
+
+// From module: SD/MMC stack on SPI interface
+#include <sd_mmc.h>
 
 // From module: SPI - Serial Peripheral Interface
 #include <spi.h>
@@ -137,6 +146,16 @@
 
 // From module: USART - Universal Synchronous/Asynchronous Receiver/Transmitter
 #include <usart.h>
+
+// From module: USB Device MSC (Single Interface Device)
+#include <udi_msc.h>
+
+// From module: USB Device Stack Core (Common API)
+#include <udc.h>
+#include <udd.h>
+
+// From module: USB MSC Protocol
+#include <usb_protocol_msc.h>
 
 // From module: XMEGA compiler driver
 #include <compiler.h>
