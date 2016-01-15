@@ -44,7 +44,7 @@ MCU = atxmega256a3bu
 
 # Application target name. Given with suffix .a for library and .elf for a
 # standalone application.
-TARGET = xmega_a3bu_xplained_demo.elf
+TARGET = avrnavsegda.elf
 
 # C source files located from the top-level source directory
 CSRCS = \
