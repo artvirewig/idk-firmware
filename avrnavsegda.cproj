@@ -31,6 +31,8 @@
         <options>
           <option id="common.boards" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.components.memory.sd_mmc" value="Add" config="spi" content-id="Atmel.ASF" />
+          <option id="common.services.gfx_mono.menu" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common.services.gfx_mono.spinctrl" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.sensors" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.spi_master" value="Add" config="usart_and_standard_spi" content-id="Atmel.ASF" />
@@ -40,8 +42,7 @@
           <option id="config.common.services.qtouch.generic.avr8.xmega_a3bu_xplained.method" value="Add" config="qtouch_method" content-id="Atmel.ASF" />
           <option id="xmega.drivers.adc" value="Add" config="" content-id="Atmel.ASF" />
           <option id="xmega.drivers.ioport" value="Add" config="" content-id="Atmel.ASF" />
-          <option id="common.services.gfx_mono.menu" value="Add" config="" content-id="Atmel.ASF" />
-          <option id="common.services.gfx_mono.spinctrl" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="xmega.drivers.tc" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.applications.user_application" value="Add" config="" content-id="Atmel.ASF" />
         </options>
         <configurations>
@@ -319,6 +320,8 @@
           <file path="src/ASF/common/services/gfx_mono/tools/readme.txt" framework="" version="3.29.0" source="common\services\gfx_mono\tools\readme.txt" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/gfx_mono/gfx_mono_c12832_a1z.c" framework="" version="3.29.0" source="common\services\gfx_mono\gfx_mono_c12832_a1z.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/gfx_mono/gfx_mono_c12832_a1z.h" framework="" version="3.29.0" source="common\services\gfx_mono\gfx_mono_c12832_a1z.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/xmega/drivers/tc/tc.c" framework="" version="3.29.0" source="xmega\drivers\tc\tc.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/xmega/drivers/tc/tc.h" framework="" version="3.29.0" source="xmega\drivers\tc\tc.h" changed="False" content-id="Atmel.ASF" />
         </files>
         <documentation help="http://asf.atmel.com/docs/3.29.0/common.applications.user_application.xmega_a3bu_xplained/html/index.html" />
         <offline-documentation help="" />
@@ -417,6 +420,7 @@
             <Value>../src/ASF/xmega/drivers/usb</Value>
             <Value>../src/ASF/common/components/display/st7565r</Value>
             <Value>../src/ASF/common/services/gfx_mono</Value>
+            <Value>../src/ASF/xmega/drivers/tc</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -485,6 +489,7 @@
             <Value>../src/ASF/xmega/drivers/usb</Value>
             <Value>../src/ASF/common/components/display/st7565r</Value>
             <Value>../src/ASF/common/services/gfx_mono</Value>
+            <Value>../src/ASF/xmega/drivers/tc</Value>
           </ListValues>
         </avrgcc.assembler.general.IncludePaths>
       </AvrGcc>
@@ -564,6 +569,7 @@
             <Value>../src/ASF/xmega/drivers/usb</Value>
             <Value>../src/ASF/common/components/display/st7565r</Value>
             <Value>../src/ASF/common/services/gfx_mono</Value>
+            <Value>../src/ASF/xmega/drivers/tc</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -633,6 +639,7 @@
             <Value>../src/ASF/xmega/drivers/usb</Value>
             <Value>../src/ASF/common/components/display/st7565r</Value>
             <Value>../src/ASF/common/services/gfx_mono</Value>
+            <Value>../src/ASF/xmega/drivers/tc</Value>
           </ListValues>
         </avrgcc.assembler.general.IncludePaths>
         <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
@@ -723,6 +730,7 @@
     <Folder Include="src\ASF\xmega\drivers\rtc32\" />
     <Folder Include="src\ASF\xmega\drivers\sleep\" />
     <Folder Include="src\ASF\xmega\drivers\spi\" />
+    <Folder Include="src\ASF\xmega\drivers\tc\" />
     <Folder Include="src\ASF\xmega\drivers\twi\" />
     <Folder Include="src\ASF\xmega\drivers\usart\" />
     <Folder Include="src\ASF\xmega\drivers\usb\" />
@@ -751,6 +759,15 @@
     <Compile Include="src\ASF\common\services\gfx_mono\gfx_mono_c12832_a1z.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\ASF\xmega\drivers\tc\tc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\touch.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\xmega\drivers\tc\tc.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ntc_sensor.c">
       <SubType>compile</SubType>
     </Compile>

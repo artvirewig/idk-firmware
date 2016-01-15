@@ -46,7 +46,7 @@
 
 #include "xmega_a3bu_xplained.h"
 #define GPIO_PUSH_BUTTON_3              IOPORT_CREATE_PIN(PORTA, 6)
-//#include "touch_api.h"
+#include "touch_api.h"
 #include "keyboard.h"
 #include "cdc.h"
 
@@ -99,13 +99,13 @@ void keyboard_get_key_state(struct keyboard_event *keybuffer)
 		keybuffer->type = KEYBOARD_RELEASE;
 	} else if ((gpio_pin_is_low(GPIO_PUSH_BUTTON_3)) &&
 			!(key_state & KEYBOARD_BACK_MASK)) {
-		// Touch key pressed
+		// Key pressed
 		key_state |= KEYBOARD_BACK_MASK;
 		keybuffer->keycode = KEYBOARD_BACK;
 		keybuffer->type = KEYBOARD_PRESS;
 	} else if ((gpio_pin_is_high(GPIO_PUSH_BUTTON_3)) &&
 			(key_state & KEYBOARD_BACK_MASK)) {
-		// Touch key released
+		// Key released
 		key_state &= ~KEYBOARD_BACK_MASK;
 		keybuffer->keycode = KEYBOARD_BACK;
 		keybuffer->type = KEYBOARD_RELEASE;
