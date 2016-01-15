@@ -45,6 +45,7 @@
  */
 
 #include "xmega_a3bu_xplained.h"
+#define GPIO_PUSH_BUTTON_3              IOPORT_CREATE_PIN(PORTA, 6)
 //#include "touch_api.h"
 #include "keyboard.h"
 #include "cdc.h"
