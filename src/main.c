@@ -177,7 +177,7 @@ int main(void)
 	board_init();
 	pmic_init();
 	gfx_mono_init();
-//	touch_init();
+	touch_init();
 	//confugure adca3 as a keyboard back button
 	ioport_configure_port_pin(&PORTA, PIN6_bm, IOPORT_PULL_UP | IOPORT_DIR_INPUT);
 	adc_sensors_init();

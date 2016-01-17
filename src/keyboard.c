@@ -111,7 +111,7 @@ void keyboard_get_key_state(struct keyboard_event *keybuffer)
 		keybuffer->type = KEYBOARD_RELEASE;
 			
 	// touch key
-	} else if ((check_touch_key_pressed()) &&
+	/*} else if ((check_touch_key_pressed()) &&
 	!(key_state & KEYBOARD_BACK_MASK)) {
 		// Touch key pressed
 		key_state |= KEYBOARD_BACK_MASK;
@@ -122,7 +122,7 @@ void keyboard_get_key_state(struct keyboard_event *keybuffer)
 		// Touch key released
 		key_state &= ~KEYBOARD_BACK_MASK;
 		keybuffer->keycode = KEYBOARD_BACK;
-		keybuffer->type = KEYBOARD_RELEASE;
+		keybuffer->type = KEYBOARD_RELEASE;*/
 	} else {
 		keybuffer->keycode = KEYBOARD_NO_KEY;
 		keybuffer->type = KEYBOARD_NO_EVENT;
