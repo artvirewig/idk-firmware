@@ -54,6 +54,7 @@ void spi_application(void)
 {
 	int number = 0;
 	int number2 = 0;
+	unsigned int result = 0;
 	uint8_t data_buffer[1] = {0x38};
 	uint8_t read_buffer[2] = {0x00, 0x00};
 	struct keyboard_event input_key;
@@ -77,8 +78,12 @@ void spi_application(void)
 					spi_write_packet(&SPIC, data_buffer, 1);					
 					spi_read_packet(&SPIC, &read_buffer, 2);	
 					//spi_read_packet(&SPIC, &number2, 2);			
-					//printf("recieved %X %X\n\r",read_buffer[1],read_buffer[2]);
-					snprintf(string_buf, sizeof(string_buf), "%2.2X %2.2X", read_buffer[0],read_buffer[1]);
+					MSB(result) = read_buffer[0];
+					LSB(result) = read_buffer[1];
+					printf("%X %X\n",read_buffer[0],read_buffer[1]);
+					//printf("%D\n",result);
+					//snprintf(string_buf, sizeof(string_buf), "%2.2X %2.2X", read_buffer[0],read_buffer[1]);
+					snprintf(string_buf, sizeof(string_buf), "%d", result-0x8000);
 					//snprintf(string_buf, sizeof(string_buf), "%X",number2);
 					gfx_mono_draw_string(string_buf, 30, 16, &sysfont);
 				}
