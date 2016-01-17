@@ -172,6 +172,13 @@ int main(void)
 	uint8_t menu_status;
 	struct keyboard_event input;
 	uint32_t rtc_timestamp;
+	
+	const usart_serial_options_t usart_serial_options = {
+		.baudrate   = CONF_BAUDRATE,
+		.charlength = CONF_CHARLENGTH,
+		.paritytype = CONF_PARITY,
+		.stopbits   = CONF_STOPBITS,
+	};
 
 	sysclk_init();
 	board_init();
@@ -182,6 +189,7 @@ int main(void)
 	ioport_configure_port_pin(&PORTA, PIN6_bm, IOPORT_PULL_UP | IOPORT_DIR_INPUT);
 	adc_sensors_init();
 	adcb_sensors_init();
+	stdio_serial_init(CONF_USART, &usart_serial_options);
 
 	// Enable display backlight
 	gpio_set_pin_high(NHD_C12832A1Z_BACKLIGHT);
@@ -211,6 +219,9 @@ int main(void)
 
 	// Initialize USB CDC class
 	//cdc_start();
+	
+	printf("\x0C\n\r-- Example --\n\r");
+	printf("-- Compiled: %s %s --\n\r", __DATE__, __TIME__);
 
 	cpu_irq_enable();
 

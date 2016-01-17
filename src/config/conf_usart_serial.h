@@ -47,4 +47,15 @@
 #ifndef CONF_USART_SERIAL_H_INCLUDED
 #define CONF_USART_SERIAL_H_INCLUDED
 
+//! \note Using USART on PORTC (PC2 & PC3)
+#define CONF_USART      &USARTC0
+//! \note 38.4kbps
+#define CONF_BAUDRATE   9600
+//! \note 8-bit character length
+#define CONF_CHARLENGTH USART_CHSIZE_8BIT_gc
+//! \note No parity check
+#define CONF_PARITY     USART_PMODE_DISABLED_gc
+//! \note No extra stopbit, i.e., use 1
+#define CONF_STOPBITS   false
+
 #endif /* CONF_USART_SERIAL_H_INCLUDED */
