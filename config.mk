@@ -70,6 +70,8 @@ CSRCS = \
        common/services/usb/udc/udc.c                      \
        common/services/usb/class/msc/device/udi_msc.c     \
        common/services/usb/class/msc/device/udi_msc_desc.c \
+       common/utils/stdio/read.c			  \
+       common/utils/stdio/write.c			  \
        ../adc_display.c \
        ../adc_sensors.c \
        ../bitmaps.c \
@@ -153,6 +155,7 @@ LIB_PATH =  \
 # Libraries to link with the project
 LIBS =  \
        avrxmega6g1-4qt-k-0rs                              \
+       printf_flt					  \
        m                                                 
 
 # Additional options for debugging. By default the common Makefile.in will
@@ -206,7 +209,8 @@ CPPFLAGS = \
 
 # Extra flags to use when linking
 LDFLAGS =  \
-       -Wl,--section-start=.BOOT=0x40000                 
+       -Wl,--section-start=.BOOT=0x40000                  \
+       -Wl,-u,vfprintf
 
 # Pre- and post-build commands
 PREBUILD_CMD = 
