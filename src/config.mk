@@ -37,14 +37,14 @@
 #
 
 # Path to top level ASF directory relative to this project directory.
-PRJ_PATH = src/ASF
+PRJ_PATH = ASF
 
 # Microcontroller: atxmega128a1, atmega128, attiny261, etc.
 MCU = atxmega256a3bu
 
 # Application target name. Given with suffix .a for library and .elf for a
 # standalone application.
-TARGET = avrnavsegda.elf
+TARGET = ../avrnavsegda.elf
 
 # C source files located from the top-level source directory
 CSRCS = \

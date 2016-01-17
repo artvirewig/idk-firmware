@@ -48,5 +48,5 @@
 
 # Include the common Makefile, which will also include the project specific
 # config.mk file.
-MAKEFILE_PATH = src/ASF/common/utils/make/Makefile.avr.in
+MAKEFILE_PATH = ASF/common/utils/make/Makefile.avr.in
 include $(MAKEFILE_PATH)
