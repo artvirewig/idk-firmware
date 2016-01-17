@@ -83,5 +83,7 @@ struct keyboard_event {
 };
 
 void keyboard_get_key_state(struct keyboard_event *key);
+bool check_touch_key_pressed(void);
+void touch_init(void);
 
 #endif /* KEYBOARD_H_INCLUDED */
