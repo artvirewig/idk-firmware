@@ -3,7 +3,7 @@
  *
  * Created: 12/30/2015 4:55:47 PM
  *  Author: Art Navsegda
- */ 
+ */
 
 #include "stdio.h"
 #include "sysfont.h"
@@ -52,6 +52,8 @@ void spi_sensor_init(void)
 
 void spi_application(void)
 {
+	int median;
+	long average = 0;
 	int number = 0;
 	int number2 = 0;
 	unsigned int result = 0;
@@ -59,7 +61,7 @@ void spi_application(void)
 	uint8_t read_buffer[2] = {0x00, 0x00};
 	struct keyboard_event input_key;
 	char string_buf[10];
-	
+
 	// Clear screen
 	gfx_mono_draw_filled_rect(0, 0, 128, 32, GFX_PIXEL_CLR);
 
@@ -71,23 +73,35 @@ void spi_application(void)
 			data_buffer[0] = 0x08;
 			spi_write_packet(&SPIC, data_buffer, 1);
 			spi_read_packet(&SPIC, &number, 1);
-			
+
 				if (number == 8)
 				{
 					data_buffer[0] = 0x38;
-					spi_write_packet(&SPIC, data_buffer, 1);					
-					spi_read_packet(&SPIC, &read_buffer, 2);	
-					//spi_read_packet(&SPIC, &number2, 2);			
+					spi_write_packet(&SPIC, data_buffer, 1);
+					spi_read_packet(&SPIC, &read_buffer, 2);
+					//spi_read_packet(&SPIC, &number2, 2);
 					MSB(result) = read_buffer[0];
 					LSB(result) = read_buffer[1];
-					printf("%X %X\n",read_buffer[0],read_buffer[1]);
+					//printf("%X %X\n",read_buffer[0],read_buffer[1]);
 					//printf("%D\n",result);
-					//snprintf(string_buf, sizeof(string_buf), "%2.2X %2.2X", read_buffer[0],read_buffer[1]);
+					snprintf(string_buf, sizeof(string_buf), "%2.2X%2.2X", read_buffer[0],read_buffer[1]);
+					gfx_mono_draw_string(string_buf, 30, 6, &sysfont);
 					snprintf(string_buf, sizeof(string_buf), "%d", result-0x8000);
 					//snprintf(string_buf, sizeof(string_buf), "%X",number2);
 					gfx_mono_draw_string(string_buf, 30, 16, &sysfont);
+					average = average + result;
+					median++;
+					if (median == 128)
+					{
+						snprintf(string_buf, sizeof(string_buf), "%X", (average >> 7));
+						gfx_mono_draw_string(string_buf, 70, 6, &sysfont);
+						snprintf(string_buf, sizeof(string_buf), "%d", (average >> 7)-0x8000);
+						gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
+						average = 0;
+						median = 0;
+					}
 				}
-			
+
 			keyboard_get_key_state(&input_key);
 			if ((input_key.keycode == KEYBOARD_ENTER) &&
 			(input_key.type == KEYBOARD_RELEASE)) {
