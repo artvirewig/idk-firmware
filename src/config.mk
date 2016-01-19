@@ -84,6 +84,7 @@ CSRCS = \
        ../ntc_sensor.c \
        ../production_date.c \
        ../spi_display.c \
+       ../setup.c \
        ../timezone.c \
        xmega/boards/xmega_a3bu_xplained/init.c            \
        xmega/drivers/adc/adc.c                            \

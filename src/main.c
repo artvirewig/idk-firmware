@@ -92,6 +92,7 @@
 #include "adc_display.h"
 #include "spi_display.h"
 #include "i2c_display.h"
+#include "setup.h"
 
 /* Main menu: strings are stored in FLASH,
  * the string pointer table and menu struct are stored in RAM.
@@ -105,6 +106,7 @@ PROGMEM_DECLARE(char const, main_menu_5[]) = "Toggle Backlight";
 PROGMEM_DECLARE(char const, main_menu_6[]) = "ADC";
 PROGMEM_DECLARE(char const, main_menu_7[]) = "SPI";
 PROGMEM_DECLARE(char const, main_menu_8[]) = "I2C";
+PROGMEM_DECLARE(char const, main_menu_9[]) = "Setup";
 
 PROGMEM_STRING_T main_menu_strings[] = {
 	main_menu_1,
@@ -115,6 +117,7 @@ PROGMEM_STRING_T main_menu_strings[] = {
 	main_menu_6,
 	main_menu_7,
 	main_menu_8,
+    main_menu_9,
 };
 
 struct gfx_mono_menu main_menu = {
@@ -123,7 +126,7 @@ struct gfx_mono_menu main_menu = {
 	// Array with menu strings
 	main_menu_strings,
 	// Number of menu elements
-	8,
+	9,
 	// Initial selection
 	0
 };
@@ -278,6 +281,9 @@ int main(void)
 		case 7:
 			i2c_application();
 			break;
+        case 8:
+            setup_application();
+            break;
 		case GFX_MONO_MENU_EVENT_EXIT:
 			// Fall trough to default and show button splash
 		default:
