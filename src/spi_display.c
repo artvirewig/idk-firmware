@@ -44,7 +44,7 @@ void spi_sensor_init(void)
 	spi_write_packet(&SPIC, data_buffer, 1);
 	data_buffer[0] = 0x10;
 	spi_write_packet(&SPIC, data_buffer, 1);
-	data_buffer[0] = 0x40;
+	data_buffer[0] = 0;
 	spi_write_packet(&SPIC, data_buffer, 1);
 
 	spi_deselect_device(&SPIC, &SPI_ADC);
@@ -84,18 +84,19 @@ void spi_application(void)
 					LSB(result) = read_buffer[1];
 					//printf("%X %X\n",read_buffer[0],read_buffer[1]);
 					//printf("%D\n",result);
-					snprintf(string_buf, sizeof(string_buf), "%2.2X%2.2X", read_buffer[0],read_buffer[1]);
+					snprintf(string_buf, sizeof(string_buf), " %2.2X%2.2X", read_buffer[0],read_buffer[1]);
 					gfx_mono_draw_string(string_buf, 30, 6, &sysfont);
-					snprintf(string_buf, sizeof(string_buf), "%d", result-0x8000);
+					snprintf(string_buf, sizeof(string_buf), "%5d", result-0x8000);
 					//snprintf(string_buf, sizeof(string_buf), "%X",number2);
 					gfx_mono_draw_string(string_buf, 30, 16, &sysfont);
 					average = average + result;
 					median++;
-					if (median == 128)
+					if (median == 256)
 					{
-						snprintf(string_buf, sizeof(string_buf), "%X", (average >> 7));
+						//snprintf(string_buf, sizeof(string_buf), "%X", (average >> 7));
+						snprintf(string_buf, sizeof(string_buf), " %lX", average);
 						gfx_mono_draw_string(string_buf, 70, 6, &sysfont);
-						snprintf(string_buf, sizeof(string_buf), "%d", (average >> 7)-0x8000);
+						snprintf(string_buf, sizeof(string_buf), "%5d", (average >> 8)-0x8000);
 						gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
 						average = 0;
 						median = 0;

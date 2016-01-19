@@ -50,3 +50,6 @@
 # config.mk file.
 MAKEFILE_PATH = ASF/common/utils/make/Makefile.avr.in
 include $(MAKEFILE_PATH)
+
+upload: ../avrnavsegda.hex
+	avrdude -U application:w:../avrnavsegda.hex -c avrisp2 -p x256a3bu
