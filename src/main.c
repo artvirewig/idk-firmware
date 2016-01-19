@@ -225,6 +225,8 @@ int main(void)
 	
 	printf("\x0C\n\r-- Example --\n\r");
 	printf("-- Compiled: %s %s --\n\r", __DATE__, __TIME__);
+	clockreg = 0x0c;
+	setupreg = 0x40;
 
 	cpu_irq_enable();
 

@@ -11,6 +11,7 @@
 #include "keyboard.h"
 #include "spi_master.h"
 #include "spi_display.h"
+#include "setup.h"
 
 uint8_t resetdata[5] = {0xFF,0xFF,0xFF,0xFF,0xFF};
 
@@ -40,11 +41,13 @@ void spi_sensor_init(void)
 	spi_write_packet(&SPIC, resetdata, 5);
 	data_buffer[0] = 0x20;
 	spi_write_packet(&SPIC, data_buffer, 1);
-	data_buffer[0] = 0x0C;
+	//data_buffer[0] = 0x0C;
+	data_buffer[0] = clockreg;
 	spi_write_packet(&SPIC, data_buffer, 1);
 	data_buffer[0] = 0x10;
 	spi_write_packet(&SPIC, data_buffer, 1);
-	data_buffer[0] = 0;
+	//data_buffer[0] = 0;
+	data_buffer[0] = setupreg;
 	spi_write_packet(&SPIC, data_buffer, 1);
 
 	spi_deselect_device(&SPIC, &SPI_ADC);

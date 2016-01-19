@@ -14,11 +14,11 @@
 #include "gfx_mono_menu.h"
 #include "gfx_mono_spinctrl.h"
 
-PROGMEM_DECLARE(char const, spinnertitle[]) = "Strings:";
-PROGMEM_DECLARE(char const, spinnertitle2[]) = "Numbers:";
-PROGMEM_DECLARE(char const, spinnertitle3[]) = "Numbers2:";
-PROGMEM_DECLARE(char const, spinner_choice1[]) = "String";
-PROGMEM_DECLARE(char const, spinner_choice2[]) = "String 2";
+PROGMEM_DECLARE(char const, spinnertitle[]) = "Approx:";
+PROGMEM_DECLARE(char const, spinnertitle2[]) = "Clock reg:";
+PROGMEM_DECLARE(char const, spinnertitle3[]) = "Setup reg:";
+PROGMEM_DECLARE(char const, spinner_choice1[]) = "Single";
+PROGMEM_DECLARE(char const, spinner_choice2[]) = "Double";
 PROGMEM_DECLARE(char const, spinner_choice3[]) = "String 3";
 PROGMEM_DECLARE(char const, spinner_choice4[]) = "String 4";
 
@@ -46,12 +46,9 @@ void setup_application(void)
     //gfx_mono_draw_string("Setup", 0, 0, &sysfont);
 		
 	// Initialize spinners
-	gfx_mono_spinctrl_init(&spinner1, SPINTYPE_STRING, spinnertitle,
-	spinner_choicestrings, 0, 3, 0);
-	gfx_mono_spinctrl_init(&spinner2, SPINTYPE_INTEGER,
-	spinnertitle2, NULL, -60, -41, 0);
-	gfx_mono_spinctrl_init(&spinner3, SPINTYPE_INTEGER,
-	spinnertitle3, NULL, 19999, 20200, 0);
+	gfx_mono_spinctrl_init(&spinner1, SPINTYPE_STRING, spinnertitle, spinner_choicestrings, 0, 3, 0);
+	gfx_mono_spinctrl_init(&spinner2, SPINTYPE_INTEGER,	spinnertitle2, NULL, 0x00, 0xFF, 0);
+	gfx_mono_spinctrl_init(&spinner3, SPINTYPE_INTEGER,	spinnertitle3, NULL, 0x00, 0xFF, 0);
 
 	// Initialize spincollection
 	gfx_mono_spinctrl_spincollection_init(&spinners);
@@ -60,6 +57,9 @@ void setup_application(void)
 	gfx_mono_spinctrl_spincollection_add_spinner(&spinner1, &spinners);
 	gfx_mono_spinctrl_spincollection_add_spinner(&spinner2, &spinners);
 	gfx_mono_spinctrl_spincollection_add_spinner(&spinner3, &spinners);
+	
+	spinner2.integer_data = clockreg;
+	spinner3.integer_data = setupreg;
 
 	// Show spincollection on screen
 	gfx_mono_spinctrl_spincollection_show(&spinners);
@@ -74,5 +74,8 @@ void setup_application(void)
 		spinner_status = gfx_mono_spinctrl_spincollection_process_key(
 		&spinners, input.keycode, results);
 	} while (spinner_status != GFX_MONO_SPINCTRL_EVENT_FINISH);
+	
+	clockreg = results[1];
+	setupreg = results[2];
     
 }
