@@ -115,6 +115,7 @@ INC_PATH = \
        common/services/ioport                             \
        common/services/sensors                            \
        common/services/serial                             \
+       common/services/serial/xmega_usart                 \
        common/services/storage/ctrl_access                \
        common/services/sleepmgr                           \
        common/services/spi                                \

@@ -85,8 +85,8 @@ void spi_application(void)
 					//spi_read_packet(&SPIC, &number2, 2);
 					MSB(result) = read_buffer[0];
 					LSB(result) = read_buffer[1];
-					//printf("%X %X\n",read_buffer[0],read_buffer[1]);
-					//printf("%D\n",result);
+					//printf("%2.2X %2.2X\n",read_buffer[0],read_buffer[1]);
+					printf("%d ",result-0x8000);
 					snprintf(string_buf, sizeof(string_buf), " %2.2X%2.2X", read_buffer[0],read_buffer[1]);
 					gfx_mono_draw_string(string_buf, 30, 6, &sysfont);
 					snprintf(string_buf, sizeof(string_buf), "%5d", result-0x8000);
