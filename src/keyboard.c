@@ -123,6 +123,9 @@ void keyboard_get_key_state(struct keyboard_event *keybuffer)
 		key_state &= ~KEYBOARD_BACK_MASK;
 		keybuffer->keycode = KEYBOARD_BACK;
 		keybuffer->type = KEYBOARD_RELEASE;*/
+	} else if ((key = cdc_getkey()) != KEYBOARD_NO_KEY) {
+		keybuffer->keycode = key;
+		keybuffer->type = KEYBOARD_RELEASE;
 	} else {
 		keybuffer->keycode = KEYBOARD_NO_KEY;
 		keybuffer->type = KEYBOARD_NO_EVENT;

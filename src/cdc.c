@@ -46,7 +46,10 @@
 #include "nvm.h"
 #include "keyboard.h"
 #include "cdc.h"
-#include <stdio.h>
+#include "usart.h"
+#include "usart_serial.h"
+#include "usart_spi.h"
+#include "stdio_serial.h"
 
 //! USBID position in user signature row
 #define USER_SIGNATURE_USBID_POS   8
@@ -78,21 +81,14 @@ static void cdc_put_help(void)
 
 void cdc_start(void)
 {
-	uint8_t i;
-	uint8_t temp;
-	uint8_t nibble_to_ascii[16] = "0123456789ABCDEF";
+	const usart_serial_options_t usart_serial_options = {
+		.baudrate   = CONF_BAUDRATE,
+		.charlength = CONF_CHARLENGTH,
+		.paritytype = CONF_PARITY,
+		.stopbits   = CONF_STOPBITS,
+	};
 
-	/* Copy serial number from user signature row and convert to ASCII
-	 * The 6 byte id results in a 12 byte string (1 character per nibble)
-	 */
-	for (i = 0; i < USER_SIGNATURE_USBID_SIZE / 2; i++) {
-		temp = nvm_read_user_signature_row(
-				i + USER_SIGNATURE_USBID_POS);
-		// Upper nibble
-		cdc_serial_number[i * 2] = nibble_to_ascii[(temp & 0xF0) >> 4];
-		// Lower nibble
-		cdc_serial_number[(i * 2) + 1] = nibble_to_ascii[temp & 0x0F];
-	}
+	stdio_serial_init(CONF_USART, &usart_serial_options);
 }
 
 void cdc_set_dtr(bool enable)
@@ -109,6 +105,10 @@ keycode_t cdc_getkey(void)
 	if (cdc_opened) {
 		cdc_opened = false;
 		cdc_put_help();
+	}
+
+	if (!usart_spi_is_rx_ready(CONF_USART)) {
+		return KEYBOARD_NO_KEY;
 	}
 
 	key = getchar();
