@@ -1,1 +1,3 @@
-fix i2c gpio expander interface
+- fix i2c gpio expander interface
+- full blown serial interface
+
