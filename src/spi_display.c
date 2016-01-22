@@ -32,23 +32,42 @@ static bool spi_init_pins(void)
 
 void spi_sensor_init(void)
 {
-	uint8_t data_buffer[1] = {0x38};
+	uint8_t data_buffer[3] = {0x0, 0x0, 0x0};
 	spi_init_pins();
 	spi_master_init(&SPIC);
 	spi_master_setup_device(&SPIC, &SPI_ADC, SPI_MODE_3, 500000, 0);
 	spi_enable(&SPIC);
 	spi_select_device(&SPIC, &SPI_ADC);
 	spi_write_packet(&SPIC, resetdata, 5);
+	//clock reg
 	data_buffer[0] = 0x20;
 	spi_write_packet(&SPIC, data_buffer, 1);
-	//data_buffer[0] = 0x0C;
+	data_buffer[0] = 0x00;
 	data_buffer[0] = clockreg;
 	spi_write_packet(&SPIC, data_buffer, 1);
+	
+	//setup reg
 	data_buffer[0] = 0x10;
 	spi_write_packet(&SPIC, data_buffer, 1);
-	//data_buffer[0] = 0;
+	//data_buffer[0] = 0x04;
 	data_buffer[0] = setupreg;
 	spi_write_packet(&SPIC, data_buffer, 1);
+	
+	//offset reg
+	data_buffer[0] = 0x60;
+	spi_write_packet(&SPIC, data_buffer, 1);
+	data_buffer[0] = 0x18;
+	data_buffer[1] = 0x3A;
+	data_buffer[2] = 0x00;
+	spi_write_packet(&SPIC, data_buffer, 3);
+	
+	//gain reg
+	data_buffer[0] = 0x70;
+	spi_write_packet(&SPIC, data_buffer, 1);
+	data_buffer[0] = 0x89;
+	data_buffer[1] = 0x78;
+	data_buffer[2] = 0xD7;
+	spi_write_packet(&SPIC, data_buffer, 3);
 
 	spi_deselect_device(&SPIC, &SPI_ADC);
 }
@@ -61,7 +80,7 @@ void spi_application(void)
 	int number2 = 0;
 	unsigned int result = 0;
 	uint8_t data_buffer[1] = {0x38};
-	uint8_t read_buffer[2] = {0x00, 0x00};
+	uint8_t read_buffer[3] = {0x00, 0x00, 0x00};
 	struct keyboard_event input_key;
 	char string_buf[10];
 
@@ -79,22 +98,41 @@ void spi_application(void)
 
 				if (number == 8)
 				{
+					//data_buffer[0] = 0x10;
+					//spi_write_packet(&SPIC, data_buffer, 1);
+					//data_buffer[0] = setupreg;
+					//spi_write_packet(&SPIC, data_buffer, 1);
+					//delay_ms(400);
+					
+					data_buffer[0] = 0x68;
+					spi_write_packet(&SPIC, data_buffer, 1);
+					spi_read_packet(&SPIC, &read_buffer, 3);
+					//spi_read_packet(&SPIC, &number2, 2);
+					//printf("%2.2X %2.2X\n",read_buffer[0],read_buffer[1]);
+					//printf("%d ",result-0x8000);
+					snprintf(string_buf, sizeof(string_buf), " %2.2X%2.2X%2.2X", read_buffer[0],read_buffer[1],read_buffer[2]);
+					gfx_mono_draw_string(string_buf, 70, 6, &sysfont);
+					
+					data_buffer[0] = 0x78;
+					spi_write_packet(&SPIC, data_buffer, 1);
+					spi_read_packet(&SPIC, &read_buffer, 3);
+					snprintf(string_buf, sizeof(string_buf), " %2.2X%2.2X%2.2X", read_buffer[0],read_buffer[1],read_buffer[2]);
+					gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
+					
 					data_buffer[0] = 0x38;
 					spi_write_packet(&SPIC, data_buffer, 1);
 					spi_read_packet(&SPIC, &read_buffer, 2);
-					//spi_read_packet(&SPIC, &number2, 2);
-					MSB(result) = read_buffer[0];
-					LSB(result) = read_buffer[1];
-					//printf("%2.2X %2.2X\n",read_buffer[0],read_buffer[1]);
-					printf("%d ",result-0x8000);
 					snprintf(string_buf, sizeof(string_buf), " %2.2X%2.2X", read_buffer[0],read_buffer[1]);
 					gfx_mono_draw_string(string_buf, 30, 6, &sysfont);
-					snprintf(string_buf, sizeof(string_buf), "%5d", result-0x8000);
+					MSB(result) = read_buffer[0];
+					LSB(result) = read_buffer[1];
+					snprintf(string_buf, sizeof(string_buf), "%ld ", (long)result-0x17CC);
+					printf("%5ld ",(long)result-0x17CC);
 					//snprintf(string_buf, sizeof(string_buf), "%X",number2);
 					gfx_mono_draw_string(string_buf, 30, 16, &sysfont);
-					average = average + result;
-					median++;
-					if (median == 256)
+					//average = average + result;
+					//median++;
+					/*if (median == 256)
 					{
 						//snprintf(string_buf, sizeof(string_buf), "%X", (average >> 7));
 						snprintf(string_buf, sizeof(string_buf), " %lX", average);
@@ -103,7 +141,7 @@ void spi_application(void)
 						gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
 						average = 0;
 						median = 0;
-					}
+					}*/
 				}
 
 			keyboard_get_key_state(&input_key);

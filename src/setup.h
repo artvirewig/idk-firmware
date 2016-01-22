@@ -9,8 +9,8 @@
 #ifndef setup_h
 #define setup_h
 
-char clockreg;
-char setupreg;
+unsigned char clockreg;
+unsigned char setupreg;
 
 void setup_application(void);
 
