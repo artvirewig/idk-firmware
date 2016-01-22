@@ -42,7 +42,7 @@ void spi_sensor_init(void)
 	//clock reg
 	data_buffer[0] = 0x20;
 	spi_write_packet(&SPIC, data_buffer, 1);
-	data_buffer[0] = 0x00;
+	//data_buffer[0] = 0x00;
 	data_buffer[0] = clockreg;
 	spi_write_packet(&SPIC, data_buffer, 1);
 	
