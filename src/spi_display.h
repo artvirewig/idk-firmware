@@ -9,6 +9,8 @@
 #ifndef SPI_DISPLAY_H_
 #define SPI_DISPLAY_H_
 
+struct spi_device SPI_ADC;
+
 void spi_sensor_init(void);
 void spi_application(void);
 
