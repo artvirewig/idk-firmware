@@ -764,6 +764,12 @@
     <Compile Include="src\ASF\xmega\drivers\tc\tc.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\serial_transfer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\serial_transfer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\setup.c">
       <SubType>compile</SubType>
     </Compile>

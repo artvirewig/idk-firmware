@@ -6,8 +6,8 @@
  */ 
 
 
-#ifndef SERIAL_H_
-#define SERIAL_H_
+#ifndef SERIAL_TRANSFER_H_
+#define SERIAL_TRANSFER_H_
 
 void serial_application(void);
 

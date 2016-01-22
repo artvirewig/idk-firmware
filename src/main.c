@@ -93,7 +93,7 @@
 #include "spi_display.h"
 #include "i2c_display.h"
 #include "setup.h"
-#include "serial.h"
+#include "serial_transfer.h"
 
 /* Main menu: strings are stored in FLASH,
  * the string pointer table and menu struct are stored in RAM.
