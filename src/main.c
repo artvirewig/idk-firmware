@@ -165,6 +165,8 @@ void button_splash(void)
 	}
 }
 
+int startup = 1;
+
 /**
  * \brief Main function.
  *
@@ -232,6 +234,12 @@ int main(void)
 	setupreg = 0x4;
 
 	cpu_irq_enable();
+
+	if (startup == 1)
+	{
+		spi_application();
+	}
+	startup = 0;
 
 	// Display a splash screen showing button functions
 	button_splash();

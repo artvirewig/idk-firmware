@@ -104,7 +104,7 @@ void spi_application(void)
 					//spi_write_packet(&SPIC, data_buffer, 1);
 					//delay_ms(400);
 					
-					data_buffer[0] = 0x68;
+					/*data_buffer[0] = 0x68;
 					spi_write_packet(&SPIC, data_buffer, 1);
 					spi_read_packet(&SPIC, &read_buffer, 3);
 					//spi_read_packet(&SPIC, &number2, 2);
@@ -117,31 +117,32 @@ void spi_application(void)
 					spi_write_packet(&SPIC, data_buffer, 1);
 					spi_read_packet(&SPIC, &read_buffer, 3);
 					snprintf(string_buf, sizeof(string_buf), " %2.2X%2.2X%2.2X", read_buffer[0],read_buffer[1],read_buffer[2]);
-					gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
+					gfx_mono_draw_string(string_buf, 70, 16, &sysfont);*/
 					
 					data_buffer[0] = 0x38;
 					spi_write_packet(&SPIC, data_buffer, 1);
 					spi_read_packet(&SPIC, &read_buffer, 2);
-					snprintf(string_buf, sizeof(string_buf), " %2.2X%2.2X", read_buffer[0],read_buffer[1]);
-					gfx_mono_draw_string(string_buf, 30, 6, &sysfont);
+					// snprintf(string_buf, sizeof(string_buf), " %2.2X%2.2X", read_buffer[0],read_buffer[1]);
+					// gfx_mono_draw_string(string_buf, 30, 6, &sysfont);
 					MSB(result) = read_buffer[0];
 					LSB(result) = read_buffer[1];
-					snprintf(string_buf, sizeof(string_buf), "%ld ", (long)result-0x17CC);
-					printf("%5ld ",(long)result-0x17CC);
+					// snprintf(string_buf, sizeof(string_buf), "%5ld ", (long)result-0x17CC);
+					//printf("%ld\n\r",(long)result-0x17CC);
 					//snprintf(string_buf, sizeof(string_buf), "%X",number2);
-					gfx_mono_draw_string(string_buf, 30, 16, &sysfont);
-					//average = average + result;
-					//median++;
-					/*if (median == 256)
+					// gfx_mono_draw_string(string_buf, 30, 16, &sysfont);
+					average = average + result;
+					median++;
+					if (median == 32)
 					{
 						//snprintf(string_buf, sizeof(string_buf), "%X", (average >> 7));
-						snprintf(string_buf, sizeof(string_buf), " %lX", average);
-						gfx_mono_draw_string(string_buf, 70, 6, &sysfont);
-						snprintf(string_buf, sizeof(string_buf), "%5d", (average >> 8)-0x8000);
-						gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
+						// snprintf(string_buf, sizeof(string_buf), " %lX", average);
+						// gfx_mono_draw_string(string_buf, 70, 6, &sysfont);
+						// snprintf(string_buf, sizeof(string_buf), "%5ld", (average >> 5)-0x17CC);
+						printf("%ld\n\r",(long)(average >> 5)-0x17CC);
+						// gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
 						average = 0;
 						median = 0;
-					}*/
+					}
 				}
 
 			keyboard_get_key_state(&input_key);
