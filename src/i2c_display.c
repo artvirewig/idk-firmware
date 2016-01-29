@@ -54,10 +54,11 @@ void i2c_application(void)
 			sensor_get_pressure(&barometer, &press_data);
 			sensor_get_temperature(&barometer, &temp_data);
 			snprintf(string_buf, sizeof(string_buf), "P = %.2f hPa ", (press_data.pressure.value / 100.0));
-			printf("P = %.2f hPa ", (press_data.pressure.value / 100.0));
+			//printf("P = %.2f hPa ", (press_data.pressure.value / 100.0));
+			printf("%.2f\n", (press_data.pressure.value / 100.0));
 			gfx_mono_draw_string(string_buf, 20, 10, &sysfont);
 			snprintf(string_buf, sizeof(string_buf), "T = %.1f C", (temp_data.temperature.value / 10.0));
-			printf("T = %.1f C\n", (temp_data.temperature.value / 10.0));
+			//printf("T = %.1f C\n", (temp_data.temperature.value / 10.0));
 			gfx_mono_draw_string(string_buf, 20, 20, &sysfont);
 			keyboard_get_key_state(&input_key);
 			if ((input_key.keycode == KEYBOARD_UP) &&
