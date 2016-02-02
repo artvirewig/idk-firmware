@@ -163,7 +163,7 @@ void spi_application(void)
 						// snprintf(string_buf, sizeof(string_buf), " %lX", average);
 						// gfx_mono_draw_string(string_buf, 70, 6, &sysfont);
 						 snprintf(string_buf, sizeof(string_buf), "%5ld", (average >> 5)-0x17CC);
-						printf("%8ld\n",(long)(average >> 5)-0x17CC);
+						printf("%8ld\n\r",(long)(average >> 5)-0x17CC);
 						 gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
 						average = 0;
 						median = 0;

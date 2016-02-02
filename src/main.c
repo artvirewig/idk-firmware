@@ -228,8 +228,8 @@ int main(void)
 	// Initialize USB CDC class
 	//cdc_start();
 	
-	printf("\x0C\n\r-- Example --\n\r");
-	printf("-- Compiled: %s %s --\n\r", __DATE__, __TIME__);
+	//printf("\x0C\n\r-- Example --\n\r");
+	//printf("-- Compiled: %s %s --\n\r", __DATE__, __TIME__);
 	clockreg = 0x0c;
 	setupreg = 0x4;
 
