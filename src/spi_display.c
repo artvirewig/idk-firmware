@@ -9,6 +9,7 @@
 #include "sysfont.h"
 #include "bitmaps.h"
 #include "keyboard.h"
+#include "twi_master.h"
 #include "spi_master.h"
 #include "spi_display.h"
 #include "setup.h"
@@ -72,8 +73,26 @@ void spi_sensor_init(void)
 	spi_deselect_device(&SPIC, &SPI_ADC);
 }
 
+#define TWI_SPEED             50000       //!< TWI data transfer rate
+
+twi_master_options_t opt = {
+		.speed = TWI_SPEED,
+		.chip  = 0x18
+};
+
+const uint8_t setup_pattern[] = {0x03,0x3f};
+const uint8_t raise_pattern[] = {0x01,0x40};
+const uint8_t drop_pattern[]  = {0x01,0x80};
+
 void spi_application(void)
 {
+	twi_package_t packet = {
+		.addr_length = 0,
+		.chip         = 0x18,      // TWI slave bus address
+		.buffer       = (void *)setup_pattern, // transfer data source buffer
+		.length       = sizeof(setup_pattern)  // transfer data size (bytes)
+	};
+	
 	int median;
 	long average = 0;
 	int number = 0;
@@ -89,6 +108,12 @@ void spi_application(void)
 
 	// Draw static strings outside the loop
 	gfx_mono_draw_string("SPI", 0, 0, &sysfont);
+	
+	twi_master_setup(&TWIE, &opt);
+	twi_master_enable(&TWIE);
+	
+	while (twi_master_write(&TWIE, &packet) != TWI_SUCCESS);
+	
 	spi_sensor_init();
 	spi_select_device(&SPIC, &SPI_ADC);
 	while (true) {
@@ -137,9 +162,9 @@ void spi_application(void)
 						//snprintf(string_buf, sizeof(string_buf), "%X", (average >> 7));
 						// snprintf(string_buf, sizeof(string_buf), " %lX", average);
 						// gfx_mono_draw_string(string_buf, 70, 6, &sysfont);
-						// snprintf(string_buf, sizeof(string_buf), "%5ld", (average >> 5)-0x17CC);
+						 snprintf(string_buf, sizeof(string_buf), "%5ld", (average >> 5)-0x17CC);
 						printf("%8ld\n",(long)(average >> 5)-0x17CC);
-						// gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
+						 gfx_mono_draw_string(string_buf, 70, 16, &sysfont);
 						average = 0;
 						median = 0;
 					}
@@ -150,6 +175,18 @@ void spi_application(void)
 			(input_key.type == KEYBOARD_RELEASE)) {
 				spi_deselect_device(&SPIC, &SPI_ADC);
 				break;
+			}
+			if ((input_key.keycode == KEYBOARD_UP) &&
+			(input_key.type == KEYBOARD_RELEASE)) {
+				packet.buffer       = (void *)drop_pattern;
+				packet.length       = sizeof(drop_pattern);
+				while (twi_master_write(&TWIE, &packet) != TWI_SUCCESS);
+			}
+			if ((input_key.keycode == KEYBOARD_DOWN) &&
+			(input_key.type == KEYBOARD_RELEASE)) {
+				packet.buffer       = (void *)raise_pattern;
+				packet.length       = sizeof(raise_pattern);
+				while (twi_master_write(&TWIE, &packet) != TWI_SUCCESS);
 			}
 	}
 }
