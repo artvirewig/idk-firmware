@@ -258,17 +258,5 @@ void calibration_application(void)
 			(input_key.type == KEYBOARD_RELEASE)) {
 				break;
 			}
-			if ((input_key.keycode == KEYBOARD_UP) &&
-			(input_key.type == KEYBOARD_RELEASE)) {
-				packet.buffer       = (void *)drop_pattern;
-				packet.length       = sizeof(drop_pattern);
-				while (twi_master_write(&TWIE, &packet) != TWI_SUCCESS);
-			}
-			if ((input_key.keycode == KEYBOARD_DOWN) &&
-			(input_key.type == KEYBOARD_RELEASE)) {
-				packet.buffer       = (void *)raise_pattern;
-				packet.length       = sizeof(raise_pattern);
-				while (twi_master_write(&TWIE, &packet) != TWI_SUCCESS);
-			}
 	}
 }
