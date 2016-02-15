@@ -48,7 +48,7 @@
 #define CONF_USART_SERIAL_H_INCLUDED
 
 //! \note Using USART on PORTC (PC2 & PC3)
-#define CONF_USART      &USARTC0
+#define CONF_USART      &USARTE0
 //! \note 38.4kbps
 #define CONF_BAUDRATE   9600
 //! \note 8-bit character length

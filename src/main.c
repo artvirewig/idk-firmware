@@ -81,7 +81,8 @@
 #include "ntc_sensor.h"
 #include "production_date.h"
 #include "timezone.h"
-//#include "touch_api.h"
+#include "touch_api.h"
+#include "touch_qt_config.h"
 #include "cdc.h"
 //#include "conf_application.h"
 //! No dates before 01.01.2011 00:00:00 UTC valid
@@ -108,7 +109,7 @@ PROGMEM_DECLARE(char const, main_menu_6[]) = "ADC";
 PROGMEM_DECLARE(char const, main_menu_7[]) = "SPI";
 PROGMEM_DECLARE(char const, main_menu_8[]) = "I2C";
 PROGMEM_DECLARE(char const, main_menu_9[]) = "Setup";
-PROGMEM_DECLARE(char const, main_menu_10[]) = "Serial";
+PROGMEM_DECLARE(char const, main_menu_10[]) = "Calibration";
 
 PROGMEM_STRING_T main_menu_strings[] = {
 	main_menu_1,
@@ -119,7 +120,7 @@ PROGMEM_STRING_T main_menu_strings[] = {
 	main_menu_6,
 	main_menu_7,
 	main_menu_8,
-    	main_menu_9,
+    main_menu_9,
 	main_menu_10,
 };
 
@@ -192,7 +193,7 @@ int main(void)
 	board_init();
 	pmic_init();
 	gfx_mono_init();
-	//touch_init();
+	touch_init();
 	//confugure adca3 as a keyboard back button
 	ioport_configure_port_pin(&PORTA, PIN6_bm, IOPORT_PULL_UP | IOPORT_DIR_INPUT);
 	adc_sensors_init();
@@ -294,12 +295,12 @@ int main(void)
 		case 7:
 			i2c_application();
 			break;
-        	case 8:
-            		setup_application();
-            		break;
-        	case 9:
-            		serial_application();
-            		break;
+        case 8:
+           		setup_application();
+           		break;
+        case 9:
+           		calibration_application();
+           		break;
 		case GFX_MONO_MENU_EVENT_EXIT:
 			// Fall trough to default and show button splash
 		default:

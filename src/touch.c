@@ -46,6 +46,7 @@
 
 #include <asf.h>
 #include "touch_api.h"
+#include "touch_qt_config.h"
 
 #ifdef _DEBUG_INTERFACE_
 /* Include files for QTouch Studio integration */

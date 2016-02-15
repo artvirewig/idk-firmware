@@ -13,6 +13,7 @@ struct spi_device SPI_ADC;
 
 void spi_sensor_init(void);
 void spi_application(void);
+void calibration_application(void);
 
 
 #endif /* SPI_DISPLAY_H_ */
