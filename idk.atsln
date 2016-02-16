@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avrnavsegda", "avrnavsegda.cproj", "{5E0F9DFB-03FF-4EEB-AB4B-1A4714A900DD}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "idk", "idk.cproj", "{5E0F9DFB-03FF-4EEB-AB4B-1A4714A900DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
